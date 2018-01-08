@@ -10,3 +10,6 @@
   background:#fff;
   font-size:24px;
 }
+button {
+  display:inline-block;
+}

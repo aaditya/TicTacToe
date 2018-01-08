@@ -2,6 +2,13 @@ var current_player = 1;
 var track = [];
 var used_pos = [];
 var move_count = 0;
+var status = 0;
+var moves = {
+  "p1":[],
+  "p2":[]
+};
+
+var win = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9][1,5,9],[3,5,7]];
 
 var map = function(x) {
   var move = document.querySelector(".area_"+x);
@@ -14,15 +21,18 @@ var map = function(x) {
   if(current_player === 1) {
       move.innerHTML = "X";
       move.disabled = "true";
+      moves.p1.push(x);
       current_player = 2;
-      autoPilot();
+      //autoPilot();
   }
   else if(current_player === 2) {
     move.innerHTML = "O";
-    move.disabled = "true";
+    move.disabled = true;
+    moves.p2.push(x);
     current_player = 1;
   }
   move_count = move_count + 1;
+  forecast();
 }
 
 var autoPilot = function() {
@@ -41,11 +51,45 @@ var autoPilot = function() {
   map(newPos);
 }
 
-/*var win = [[1,2,3],[4,5,6],[7,8,9],[1,5,9],[3,5,7]];
-
-win.forEach(function(subWin){
-  subWin.forEach(function(x){
-    var pos = document.querySelector(".area_"+x);
+var forecast = function() {
+  win.forEach(function(y) {
+      if(eqArr(y,moves.p1)) {
+        victory(1);
+      }
+      else if(eqArr(y,moves.p2)) {
+        victory(2);
+      }
+      else {
+        if(move_count == 9) {
+            alert("Match is a draw.");
+            reset();
+        }
+      }
   });
-});
-*/
+}
+
+function eqArr(a1,a2) {
+    return JSON.stringify(a1)==JSON.stringify(a2);
+}
+
+var victory = function(x) {
+  alert("Player "+x+" wins !");
+  reset();
+}
+
+var reset = function() {
+  var current_player = 1;
+  var track = [];
+  var used_pos = [];
+  var move_count = 0;
+  var status = 0;
+  var moves = {
+    "p1":[],
+    "p2":[]
+  };
+  for(let i=1;i<=9;i++) {
+    var move = document.querySelector(".area_"+i);
+    move.innerHTML = "";
+    move.disabled = false;
+  }
+}
