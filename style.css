@@ -9,7 +9,5 @@
   border:1px solid #ddd;
   background:#fff;
   font-size:24px;
-}
-button {
-  display:inline-block;
+  float:left;
 }

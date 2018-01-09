@@ -23,7 +23,7 @@ var map = function(x) {
       move.disabled = "true";
       moves.p1.push(x);
       current_player = 2;
-      //autoPilot();
+      autoPilot();
   }
   else if(current_player === 2) {
     move.innerHTML = "O";
@@ -37,34 +37,22 @@ var map = function(x) {
 
 var autoPilot = function() {
   var newPos = Math.floor(Math.random() * (9 - 1 + 1)) + 1;
-  alert("Initial:"+newPos)
   while(true) {
     if((used_pos.indexOf(newPos) >= 0)&&(track.length != 9)) {
       newPos = Math.floor(Math.random() * (9 - 1 + 1)) + 1;
-      alert("After Change:"+newPos);
     }
     else {
       break;
     }
   }
-  alert("Before Update:"+newPos)
-  map(newPos);
+  if(move_count<8) {
+    map(newPos);
+  }
 }
 
 var forecast = function() {
   win.forEach(function(y) {
-      if(eqArr(y,moves.p1)) {
-        victory(1);
-      }
-      else if(eqArr(y,moves.p2)) {
-        victory(2);
-      }
-      else {
-        if(move_count == 9) {
-            alert("Match is a draw.");
-            reset();
-        }
-      }
+
   });
 }
 
