@@ -50,11 +50,23 @@ var autoPilot = function() {
   }
 }
 
-var forecast = function() {
-  win.forEach(function(y) {
-
-  });
+function search(arr, x)
+{
+  if(arr.indexOf(x) !== -1)
+	return true;
+  else return false;
 }
+
+var forecast = function() {
+  win.forEach(function(obj, ind) {
+    if(search(moves.p1, obj[0]) && search(moves.p1, obj[1] && search(moves.p1, obj[2]))
+      victory(1);
+    else if(search(moves.p2, obj[0]) && search(moves.p2, obj[1] && search(moves.p2, obj[2]))
+      victory(2);
+});
+
+}
+
 
 function eqArr(a1,a2) {
     return JSON.stringify(a1)==JSON.stringify(a2);
